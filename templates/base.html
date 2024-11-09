@@ -1,0 +1,318 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Trust - Consultation, Design & Marketing</title>
+    <!-- Load Static Files -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/images/logo.svg' %}" alt="">
+        </div>
+        <nav>
+            <ul>
+                <!-- Navigation Links -->
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" id="contactButton">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="text">
+            <h1>Consultation,<br>Design,<br> & Marketing</h1>
+        </div>
+
+        <!-- Display Thank You message or Contact Form -->
+        {% if form_submitted %}
+        <div class="thank-you-message">
+            <h4>Thank you for reaching out to us!<br> We will get back to you soon.</h4>
+        </div>
+        {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Get a Free Consultation</h2>
+
+            <!-- Input Fields for the Contact Form -->
+            <input type="text" name="full_name" placeholder="Full Name" value="{{ form.full_name.value|default:'' }}"
+                required>
+            <input type="email" name="email" placeholder="Email Address" value="{{ form.email.value|default:'' }}"
+                required>
+            <input type="tel" name="mobile_number" placeholder="Phone Number"
+                value="{{ form.mobile_number.value|default:'' }}" required>
+            <input type="text" name="city" placeholder="City" value="{{ form.city.value|default:'' }}" required>
+
+            <!-- Submit Button -->
+            <button type="submit">Get Quote</button>
+        </form>
+        {% endif %}
+    </div>
+
+    <!-- About Section -->
+    <section>
+        <div class="content-container">
+            <div class="text-column">
+                <h2>Not Your Average Realtor</h2>
+                <p>We’re not here to simply show you houses; we’re here to help you find a home that fits your life,
+                    your dreams, and your future.</p>
+            </div>
+
+            <!-- Image Columns -->
+            <div class="image-column" id="image-column-1">
+                <img src="{% static 'images/section2/e2.svg' %}" alt="Image 2">
+            </div>
+            <div class="image-column" id="image-column-2">
+                <img src="{% static 'images/section2/e3.svg' %}" alt="Image 3">
+                <img src="{% static 'images/section2/e1.svg' %}" alt="Image 1">
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="section-heading">
+            <h2>Why Choose Us</h2>
+            <hr class="short-line">
+            <p>We are committed to providing the best service and solutions to meet your needs. Here's why our clients
+                trust us:</p>
+        </div>
+
+        <!-- Why Choose Us Cards -->
+        <div class="why-choose-us-cards">
+            <div class="card">
+                <div class="icon-container">
+                    <img src="{% static 'images/icons/home.svg' %}" alt="Icon 1">
+                </div>
+                <h3>Expertise</h3>
+                <p>Our team brings years of expertise to ensure the highest quality in everything we do.</p>
+            </div>
+            <div class="card">
+                <div class="icon-container">
+                    <img src="{% static 'images/icons/circle-dollar-sign.svg' %}" alt="Icon 2">
+                </div>
+                <h3>Innovation</h3>
+                <p>We are constantly innovating and adapting to deliver cutting-edge solutions to our clients.</p>
+            </div>
+            <div class="card">
+                <div class="icon-container">
+                    <img src="{% static 'images/icons/paintbrush-2.svg' %}" alt="Icon 3">
+                </div>
+                <h3>Reliability</h3>
+                <p>You can count on us to deliver results on time, every time, with no compromises.</p>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <!-- First image box -->
+        <div class="image-box">
+          <img src="{% static 'images/images/pexels-brett-sayles-2881232.svg' %}" alt="Image 1" style="margin-left: 38%; height: 100px; width: 100px;>
+          <div class="shape shape1"></div>
+        </div>
+        
+        <!-- Second image box -->
+        <div class="image-box">
+          <img src="{% static 'images/images/pexels-andres-ayrton-6578391.svg' %}" alt="Image 2" style="margin-left: 45%; height: 200px; width: 200px;">
+          <div class="shape shape2"></div>
+        </div>
+    
+        <!-- Third image box -->
+        <div class="image-box">
+          <img src="{% static 'images/images/pexels-fauxels-3182834.svg' %}" alt="Image 3"style="margin-left: 59%; height: 100px; width: 100px;">
+          <div class="shape shape3"></div>
+        </div>
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="section-heading">
+            <h2>About Us</h2>
+            <hr class="short-line">
+        </div>
+
+        <!-- Description -->
+        <p class="about-desc">
+            We are a team dedicated to delivering top-notch solutions that help businesses grow. With years of
+            experience and a passion for innovation, we provide services that are tailored to meet the unique needs of
+            our clients. Our approach is results-driven, ensuring that every project we take on is completed with the
+            highest level of professionalism and excellence.
+        </p>
+
+        <!-- Read More Button -->
+        <button class="read-more-btn">Read More</button>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects">
+        <h2>Our Projects</h2>
+        <p id="projectText">Helping businesses achieve their full potential through innovative consultation, design, and
+            marketing strategies. We work closely with you to craft personalized solutions that meet your unique
+            challenges and elevate your brand in the competitive market.</p>
+
+        <!-- Project Slider -->
+        <div class="project-slider">
+            {% for proj in projects %}
+            <div class="project">
+                <img src="{{ proj.image.url }}" alt="Project 1">
+                <h3>{{ proj.name }}</h3>
+                <p>{{ proj.description|slice:50 }}....</p>
+                <button class="read-more">Read More</button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Slider Arrows -->
+        <div class="slider-arrows">
+            <button class="prev-arrow">&#9664;</button>
+            <button class="next-arrow">&#9654;</button>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients">
+        <h2>Our Happy Clients</h2>
+        <div class="client-slider">
+            {% for client in clients %}
+            <div class="client-card">
+                <div class="client-info">
+                    <div class="client-image">
+                        <img src="{{ client.image.url }}" alt="{{ client.name }}">
+                    </div>
+                    <p>{{ client.description|slice:100 }}....</p>
+                    <h4>{{ client.name }}</h4>
+                    <p>{{ client.designation }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Promo Section -->
+    <section class="promo-section">
+        <div class="promo-content">
+            <h2>Ready to Elevate Your Business?</h2>
+            <p>Contact us today to get started with our expert consultation, design, and marketing services.</p>
+            <button class="promo-button">Get in Touch</button>
+        </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="subscribe-section">
+        <div class="subscribe-content">
+            <!-- Navigation Section -->
+            <section class="subscribe-navigation-section">
+                <div class="subscribe-navigation-content">
+                    <!-- Navigation Menu -->
+                    <div class="navigation-menu">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Subscribe Box -->
+                    <div class="subscribe-box">
+                        <form method="POST" action="{% url 'submitMail' %}">
+                            {% csrf_token %}
+                            <input type="email" name="email" placeholder="Enter your email"
+                                value="{{ subForm.email.value |default:''}}" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-left">
+            <p>Contact Us: (123) 456-7890</p>
+        </div>
+        <div class="footer-middle">
+            <img src="{% static 'images/images/logo.svg' %}" alt="Logo" class="footer-logo">
+        </div>
+        <div class="footer-right">
+            <!-- Social Media Icons -->
+            <a href="#" class="social-icon"><img src="{% static 'images/icons/Group-1.svg' %}" alt="Facebook"></a>
+            <a href="#" class="social-icon"><img src="{% static 'images/icons/Group.svg' %}" alt="Twitter"></a>
+            <a href="#" class="social-icon"><img src="{% static 'images/icons/linkedin.svg' %}" alt="LinkedIn"></a>
+            <a href="#" class="social-icon"><img src="{% static 'images/icons/Frame.svg' %}" alt="Instagram"></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        // Initialize Slick Slider for Projects
+        $(document).ready(function () {
+            $('.project-slider').slick({
+                infinite: true,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: true, // Use custom arrows
+                prevArrow: '.prev-arrow', // Custom left arrow
+                nextArrow: '.next-arrow', // Custom right arrow
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+    <script>
+        // Initialize Slick Slider for Clients
+        $(document).ready(function () {
+            $('.client-slider').slick({
+                infinite: true,
+                slidesToShow: 5, // Number of cards to show at a time
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: false, // Use custom arrows
+                prevArrow: '<button class="prev-arrow">&#9664;</button>', // Custom left arrow
+                nextArrow: '<button class="next-arrow">&#9654;</button>', // Custom right arrow
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+
+</html>
